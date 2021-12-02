@@ -5,6 +5,10 @@ import { Room, Star } from '@material-ui/icons';
 import axios from 'axios';
 import { format } from 'timeago.js';
 import { useSelector } from 'react-redux';
+import mapboxgl from 'mapbox-gl';
+
+// eslint-disable-next-line import/no-webpack-loader-syntax
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
 function Map() {
   const { userName, isLoggedIn } = useSelector((state) => state);
