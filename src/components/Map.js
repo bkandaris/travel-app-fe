@@ -10,8 +10,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function Map() {
   const { userName, isLoggedIn } = useSelector((state) => state);
-  // const myStorage = window.localStorage;
-  // change currentUser to null
   const [currentUser, setCurrentuser] = useState(userName);
   const [pins, setPins] = useState([]);
   const [currentPlaceId, setCurrentPlaceId] = useState(null);
@@ -19,8 +17,6 @@ function Map() {
   const [title, setTitle] = useState(null);
   const [desc, setDesc] = useState(null);
   const [rating, setRating] = useState(0);
-  // const [showRegister, setShowRegister] = useState(false);
-  // const [showLogin, setShowLogin] = useState(false);
 
   const [viewport, setViewport] = useState({
     width: '100vw',
@@ -60,11 +56,6 @@ function Map() {
       long,
     });
   };
-
-  // const handleLogout = () => {
-  //   myStorage.removeItem('user');
-  //   setCurrentuser(null);
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -186,30 +177,6 @@ function Map() {
           </div>
         </Popup>
       )}
-      {/* {currentUser ? (
-        <button onClick={handleLogout} className='button logout'>
-          Logout
-        </button>
-      ) : (
-        <div className='buttons'>
-          <button onClick={() => setShowLogin(true)} className='button login'>
-            Login
-          </button>
-          <button
-            onClick={() => setShowRegister(true)}
-            className='button register'>
-            Register
-          </button>
-        </div>
-      )} */}
-      {/* {showRegister && <Register setShowRegister={setShowRegister} />}
-      {showLogin && (
-        <Login
-          setShowLogin={setShowLogin}
-          myStorage={myStorage}
-          setCurrentuser={setCurrentuser}
-        />
-      )} */}
     </ReactMapGL>
   );
 }
