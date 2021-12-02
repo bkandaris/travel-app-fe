@@ -73,19 +73,24 @@ a {
   text-align: center;
 }
 
+h1 {
+  font-size: 4rem;
+}
+
 .home-icon {
-  font-size: 50px !important;
+  font-size: 100px !important;
   margin-bottom: 15px;
 }
 
 .home-info {
   margin-bottom: 25%;
-  color: blue;
+  color: white;
 }
 
 .home-info > h3 {
   font-style: italic;
   color: white;
+  font-size: 1.5rem;
 }
 
 .home-button {
