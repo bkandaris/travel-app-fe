@@ -33,6 +33,8 @@ const Register = ({ setShowRegister }) => {
       );
       setError(false);
       setSuccess(true);
+      dispatch(handleUserLogin(newUser.username));
+      navigate('/map');
     } catch (err) {
       setError(true);
     }

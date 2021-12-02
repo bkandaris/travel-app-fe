@@ -15,7 +15,6 @@ const Login = ({ setShowLogin, myStorage, setCurrentUser }) => {
   // Working on
   const dispatch = useDispatch();
   const { userName, isLoggedIn } = useSelector((state) => state);
-  //
 
   const handleSubmit = async (e) => {
     e.preventDefault();

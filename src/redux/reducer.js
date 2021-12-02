@@ -1,5 +1,5 @@
 // import { CHANGE_AMOUNT, CHANGE_SCORE } from './actionTypes';
-import { SET_USER } from './actionTypes';
+import { SET_USER, LOGOUT_USER } from './actionTypes';
 
 const initialState = {
   userName: '',
@@ -14,16 +14,12 @@ const reducer = (state = initialState, action) => {
         userName: action.payload,
         isLoggedIn: true,
       };
-    //     case CHANGE_AMOUNT:
-    //       return {
-    //         ...state,
-    //         amount_of_questions: action.payload,
-    //       };
-    //     case CHANGE_SCORE:
-    //       return {
-    //         ...state,
-    //         score: action.payload,
-    //       };
+    case LOGOUT_USER:
+      return {
+        ...state,
+        userName: '',
+        isLoggedIn: false,
+      };
     default:
       return state;
   }

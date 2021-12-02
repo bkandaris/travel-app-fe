@@ -6,19 +6,21 @@ import axios from 'axios';
 import { format } from 'timeago.js';
 import Register from './Register';
 import Login from './Login';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Map() {
-  const myStorage = window.localStorage;
+  const { userName, isLoggedIn } = useSelector((state) => state);
+  // const myStorage = window.localStorage;
   // change currentUser to null
-  const [currentUser, setCurrentuser] = useState(myStorage.getItem('user'));
+  const [currentUser, setCurrentuser] = useState(userName);
   const [pins, setPins] = useState([]);
   const [currentPlaceId, setCurrentPlaceId] = useState(null);
   const [newPlace, setNewPlace] = useState(null);
   const [title, setTitle] = useState(null);
   const [desc, setDesc] = useState(null);
   const [rating, setRating] = useState(0);
-  const [showRegister, setShowRegister] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
+  // const [showRegister, setShowRegister] = useState(false);
+  // const [showLogin, setShowLogin] = useState(false);
 
   const [viewport, setViewport] = useState({
     width: '100vw',
@@ -35,7 +37,6 @@ function Map() {
           'https://mapboxtravel.herokuapp.com/api/pins'
         );
         setPins(res.data);
-        console.log('res', res.data);
       } catch (err) {
         console.log(err);
       }
@@ -60,10 +61,10 @@ function Map() {
     });
   };
 
-  const handleLogout = () => {
-    myStorage.removeItem('user');
-    setCurrentuser(null);
-  };
+  // const handleLogout = () => {
+  //   myStorage.removeItem('user');
+  //   setCurrentuser(null);
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -106,13 +107,12 @@ function Map() {
               <Room
                 style={{
                   fontSize: viewport.zoom * 6,
-                  color: p.username === currentUser ? 'red' : 'darkblue',
+                  color: 'darkblue',
                   cursor: 'pointer',
                 }}
                 onClick={() => handleMarkerClick(p._id, p.lat, p.long)}
               />
             </Marker>
-
             {p._id === currentPlaceId && (
               <Popup
                 latitude={p.lat}
@@ -123,19 +123,19 @@ function Map() {
                 onClose={() => {
                   setCurrentPlaceId(null);
                 }}>
-                <div className='card'>
-                  <h4 className='place'>{p.title}</h4>
+                <div className='review-card'>
+                  <h4>{p.title}</h4>
                   <label>Review</label>
                   <p className='desc'>{p.desc}</p>
                   <label>Rating</label>
                   <div className='stars'>
                     {Array(p.rating).fill(<Star className='star' />)}
                   </div>
-                  <label>Information</label>
-                  <span className='username'>
-                    Created by <b>{p.username}</b>
+                  <label>Info</label>
+                  <span>
+                    Review by: <p className='username'>{p.username}</p>
                   </span>
-                  <span className='username'>{format(p.createdAt)}</span>
+                  <span>{format(p.createdAt)}</span>
                 </div>
               </Popup>
             )}
@@ -152,8 +152,8 @@ function Map() {
           onClose={() => {
             setNewPlace(null);
           }}>
-          <div>
-            <form onSubmit={handleSubmit}>
+          <div className='popup-wrapper'>
+            <form className='popupform' onSubmit={handleSubmit}>
               <label>Title</label>
               <input
                 placeholder='enter a title'
@@ -172,14 +172,21 @@ function Map() {
                 <option value='4'>4</option>
                 <option value='5'>5</option>
               </select>
-              <button className='submitButton' type='submit'>
-                Add location
-              </button>
+              {isLoggedIn && (
+                <button className='popupsubmit' type='submit'>
+                  Add Review
+                </button>
+              )}
+              {!isLoggedIn && (
+                <p className='need-account'>
+                  Login or Register to leave a review
+                </p>
+              )}
             </form>
           </div>
         </Popup>
       )}
-      {currentUser ? (
+      {/* {currentUser ? (
         <button onClick={handleLogout} className='button logout'>
           Logout
         </button>
@@ -194,15 +201,15 @@ function Map() {
             Register
           </button>
         </div>
-      )}
-      {showRegister && <Register setShowRegister={setShowRegister} />}
+      )} */}
+      {/* {showRegister && <Register setShowRegister={setShowRegister} />}
       {showLogin && (
         <Login
           setShowLogin={setShowLogin}
           myStorage={myStorage}
           setCurrentuser={setCurrentuser}
         />
-      )}
+      )} */}
     </ReactMapGL>
   );
 }

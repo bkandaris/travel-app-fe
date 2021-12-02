@@ -1,5 +1,5 @@
 // import { CHANGE_AMOUNT, CHANGE_SCORE } from './actionTypes';
-import { SET_USER } from './actionTypes';
+import { SET_USER, LOGOUT_USER } from './actionTypes';
 
 // export const handleScoreChange = (payload) => ({
 //   type: CHANGE_SCORE,
@@ -14,4 +14,8 @@ import { SET_USER } from './actionTypes';
 export const handleUserLogin = (payload) => ({
   type: SET_USER,
   payload,
+});
+
+export const logoutUser = () => ({
+  type: LOGOUT_USER,
 });
