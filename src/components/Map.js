@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker';
+
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { Room, Star } from '@material-ui/icons';
 import axios from 'axios';
 import { format } from 'timeago.js';
-import Register from './Register';
-import Login from './Login';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 function Map() {
   const { userName, isLoggedIn } = useSelector((state) => state);
