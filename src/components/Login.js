@@ -1,12 +1,12 @@
 import React, { useState, useRef } from 'react';
-import { Room, Cancel, Language } from '@material-ui/icons';
+import { Language } from '@material-ui/icons';
 import axios from 'axios';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { handleUserLogin } from '../redux/actions';
 import { useNavigate } from 'react-router';
 
-const Login = ({ setShowLogin, myStorage, setCurrentUser }) => {
+const Login = () => {
   const [error, setError] = useState(false);
   const nameRef = useRef();
   const passwordRef = useRef();
@@ -14,7 +14,6 @@ const Login = ({ setShowLogin, myStorage, setCurrentUser }) => {
 
   // Working on
   const dispatch = useDispatch();
-  const { userName, isLoggedIn } = useSelector((state) => state);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,13 +30,7 @@ const Login = ({ setShowLogin, myStorage, setCurrentUser }) => {
         dispatch(handleUserLogin(res.data.username));
         navigate('/map');
       }
-
-      // myStorage.setItem('user', res.data.username);
-      // setCurrentUser(res.data.username);
-      // setShowLogin(false);
-      // setError(false);
     } catch (err) {
-      // setError(true);
       setError(true);
     }
   };
@@ -62,7 +55,6 @@ const Login = ({ setShowLogin, myStorage, setCurrentUser }) => {
           {error && <span className='failure'>Wrong Credentials!</span>}
         </form>
       </div>
-      {/* <Cancel className='loginCancel' onClick={() => setShowLogin(false)} /> */}
     </div>
   );
 };

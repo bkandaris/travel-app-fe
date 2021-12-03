@@ -20,7 +20,6 @@ function Map() {
   const [desc, setDesc] = useState(null);
   const [rating, setRating] = useState(0);
 
-  console.log('reactMapGL', ReactMapGL);
 
   const [viewport, setViewport] = useState({
     width: '100vw',
