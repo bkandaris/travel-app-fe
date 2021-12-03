@@ -1,4 +1,4 @@
-# JavaScript Quiz Application
+# Traveler
 
 This project is hosted at: https://travelerapp.netlify.app/ \
 Backend repo: https://github.com/bkandaris/travel-app-be
